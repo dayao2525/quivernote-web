@@ -1,25 +1,12 @@
 <template>
     <q-form @submit="onSubmit" class="q-gutter-md">
-        <h5 class="text-grey-7 text-center">Sign up to Quiver</h5>
-
-        <q-input filled v-model="name" dense label="Name" lazy-rules
-            :rules="[val => val && val.length > 0 || 'Please type your name']" />
+        <h5 class="text-grey-7 text-center">Forget password</h5>
 
         <q-input filled v-model="email" dense label="Email" lazy-rules
-            :rules="[
-                val => val && val.length > 0 || 'Please type your email', 
-                validateEmail
-            ]
-        " 
-        />
-
-        <q-input filled type="password" v-model="password" dense label="Password" lazy-rules :rules="[
-            val => val !== null && val !== '' || 'Please type your password',
-            val => val !== null && val.length >= 6 || 'Password a least 6 characters',
-        ]" />
+            :rules="[val => val && val.length > 0 || 'Please type your email', validateEmail]" />
 
         <div>
-            <q-btn class="full-width" :label="$t('login.register')" type="submit" color="primary" />
+            <q-btn class="full-width" label="Send me reset instructions" type="submit" color="primary" />
         </div>
         <div class="row justify-end">
             <span>Already have an account?  <router-link to="/auth/login" class="text-body2 text-primary">{{$t('login.submit')}}</router-link></span>
@@ -35,14 +22,11 @@ useMeta({
 })
 // const $q = useQuasar()
 
-const name = ref('')
 const email = ref('')
-const password = ref('')
 
 const validateEmail = (v: string) => {
     return  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(v) || 'Please type a real email'
 }
-
 const onSubmit = () => {
     console.log('q')
 }
