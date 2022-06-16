@@ -3,5 +3,12 @@
 
 export default {
   failed: 'Action failed',
-  success: 'Action was successful'
+  success: 'Action was successful',
+  login: {
+    emailPlaceholder: 'Email address',
+    passwordPlaceholder: 'Password',
+    submit: 'Sign In',
+    register: 'Sign Up',
+    forgot: 'forgot your password?'
+  }
 };
