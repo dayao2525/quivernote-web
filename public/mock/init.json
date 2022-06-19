@@ -1,0 +1,76 @@
+{
+    "code": 0,
+    "msg": "Init.",
+    "data": {
+        "userinfo": {
+            "id": 30,
+            "name": "dayao",
+            "avatar": "https:\/\/uploads.quivernote.com\/image\/5f158889c98cb.png"
+        },
+        "library": [
+            {
+                "id": "inbox",
+                "name": "Inbox",
+                "icon": "fa fa-inbox",
+                "notenum": 1
+            },
+            {
+                "id": "favorites",
+                "name": "Favorites",
+                "icon": "fa fa-star-o",
+                "notenum": 0
+            },
+            {
+                "id": "recents",
+                "name": "Recents",
+                "icon": "fa fa-clock-o",
+                "notenum": 10
+            },
+            {
+                "id": "trash",
+                "name": "Trash",
+                "icon": "fa fa-trash-o",
+                "notenum": 0
+            },
+            {
+                "id": "all_notes",
+                "name": "All Notes",
+                "icon": "fa fa-hdd-o",
+                "notenum": 113
+            }
+        ],
+        "shared_notebooks": [],
+        "notebooks": [
+            {
+                "id": "4b543237cd510768c1dac7214335e889",
+                "name": "周报",
+                "order_type": "name",
+                "order_sort": "DESC",
+                "notenum": 88
+            },
+            {
+                "id": "426689e9907d41fbafd33c8490707fb0",
+                "name": "前端",
+                "order_type": "update_time",
+                "order_sort": "DESC",
+                "notenum": 8
+            },
+            {
+                "id": "bd147160193489289854dbc31d51b0b9",
+                "name": "ZQuiver Tutorial",
+                "order_type": "name",
+                "order_sort": "ASC",
+                "notenum": 15
+            }
+        ],
+        "tags": [
+            {
+                "name": "12",
+                "notenum": 1
+            }
+        ],
+        "reminder": [],
+        "last_notebookid": "4b543237cd510768c1dac7214335e889",
+        "last_noteid": "5d5a3a805df3c6d4de16c907541ccac9"
+    }
+}
