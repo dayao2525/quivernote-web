@@ -11,8 +11,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 .note-sidebar {
+    flex-shrink: 0;
     width: 210px;
     height: 100vh;
-    background-color: gray
 }
 </style>

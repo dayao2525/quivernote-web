@@ -13,6 +13,7 @@ import List from './components/List.vue'
 </script>
 <style lang="scss" scoped>
 .note-list {
+    flex-shrink: 0;
     width: 280px;
     height: 100vh;
 }

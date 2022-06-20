@@ -33,3 +33,27 @@ export interface NoteItem {
   shared: number,
   tags: string
 }
+
+// 笔记本详情
+export interface NoteDetail {
+  id: string;
+  notebookid: string;
+  name: string;
+  content: string;
+  create_time: string;
+  update_time: string;
+  favorite: number;
+  html: string;
+  shared: number;
+  tags: string;
+  reminider: any[] | {
+    done: number;
+    finished_time: number
+  };
+  export: {
+    html: string;
+    md: string;
+    pdf: string;
+    txt: string;
+  }
+}

@@ -6,3 +6,7 @@ export const getNoteList = (notebookid: string, order_type = OrderType.NAME, ord
     order_type,
     order_sort
 })
+
+export const getDetail = (notebookid: string) => api.post('/mock/detail.json',{
+    notebookid
+})
