@@ -1,5 +1,7 @@
 <template>
-    <div class="note-sidebar"></div>
+    <div class="note-sidebar">
+        <Library v-for="library in libraryStore.books" :key="library.name" :library="library" />
+    </div>
 </template>
 <script lang="ts">
 export default {
@@ -7,7 +9,9 @@ export default {
 }
 </script>
 <script setup lang="ts">
-
+import Library from './components/Library/index.vue'
+import useLibraryStore from 'stores/note-library'
+const libraryStore = useLibraryStore()
 </script>
 <style lang="scss" scoped>
 .note-sidebar {

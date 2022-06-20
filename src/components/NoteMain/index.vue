@@ -8,7 +8,7 @@
 </template>
 <script lang="ts">
 export default {
-    name: 'NoteSidebar'
+    name: 'NoteSMain'
 }
 </script>
 <script setup lang="ts">

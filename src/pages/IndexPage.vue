@@ -10,4 +10,7 @@
 import NoteSidebar from 'components/NoteSidebar/index.vue'
 import NoteList from 'components/NoteList/index.vue'
 import NoteMain from 'components/NoteMain/index.vue'
+import useGlobalStore from 'stores/global'
+const globalStore = useGlobalStore()
+globalStore.init()
 </script>

@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { getNoteList } from 'src/apis';
-import { NoteList, OrderType, OrderSort, NoteItem } from 'src/components/models';
+import { NoteList, OrderType, OrderSort, NoteItem, NoteLibraryBook } from 'src/components/models';
 import {FetchData} from 'boot/axios'
 
 export default defineStore('NoteListStore', {
@@ -14,6 +14,14 @@ export default defineStore('NoteListStore', {
   actions: {
     addNote(note: NoteItem) {
         this.list.unshift(note)
+    },
+    changeNoteBook(book: NoteLibraryBook) {
+      this.notebookid = book.id
+      this.notebookname = book.name
+      this.orderSort = OrderSort.ASC
+      this.orderType = OrderType.NAME
+      this.list = []
+      this.fetchData(this.notebookid, this.orderType, this.orderSort)
     },
     async fetchData() {
       try {

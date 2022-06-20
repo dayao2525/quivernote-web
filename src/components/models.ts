@@ -57,3 +57,26 @@ export interface NoteDetail {
     txt: string;
   }
 }
+
+export interface NoteTag {
+  name: string;
+  notenum: number
+}
+
+export interface NoteLibraryBook {
+  id: string,
+  name: string,
+  icon: string,
+  notenum: number
+}
+
+export interface NoteLibrary {
+  name: string,
+  books: NoteLibraryBook[]
+}
+
+export interface UserInfo {
+  id: number;
+  name: string;
+  avatar: string;
+}

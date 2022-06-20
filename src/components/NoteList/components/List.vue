@@ -9,9 +9,6 @@
 import Item from './Item.vue'
 import useNoteListStore from 'stores/note-list'
 const noteListStore = useNoteListStore()
-
-noteListStore.fetchData()
-
 </script>
 
 <style lang="scss" scoped>
