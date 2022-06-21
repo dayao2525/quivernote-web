@@ -1,5 +1,4 @@
 <template>
-    <div class="note-library"></div>
     <q-expansion-item class="note-library-expansion" group="library" :label="library.name.toUpperCase()">
         <q-list class="rounded-borders" dense>
             <Item v-for="book in library.books" :key="book.id" :book="book" />

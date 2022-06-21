@@ -1,5 +1,5 @@
 <template>
-    <div class="note-sidebar">
+    <div class="note-sidebar column">
         <div class="note-sidebar-header row flex-center">
             <q-btn-group class="sidebar-tag" outline>
                 <q-btn class="col" :outline="tab !== 'library'" no-caps color="primary" label="Notebooks" size="sm"
@@ -9,9 +9,14 @@
             </q-btn-group>
         </div>
 
-        <q-tab-panels v-model="tab" class="librarys" animated>
-            <q-tab-panel class="q-pa-none" name="library">
-                <Library v-for="library in libraryStore.books" :key="library.name" :library="library" />
+        <q-tab-panels v-model="tab" class="librarys col-grow" animated>
+            <q-tab-panel class="q-pa-none column" name="library">
+                <div class="note-library col-grow">
+                    <Library v-for="library in libraryStore.books" :key="library.name" :library="library" />
+                </div>
+                <div class="note-library-footer row q-px-sm items-center col-shrink">
+                    <q-btn color="primary" rounded flat icon="add" dense />
+                </div>
             </q-tab-panel>
 
             <q-tab-panel class="q-pa-none" name="tags">
@@ -64,6 +69,11 @@ const changeTab = (val: string) => {
 
 .librarys {
     background-color: #f4f5f9;
-    height: 100%;
+}
+
+.note-library-footer {
+    height: 40px;
+    border-top: 1px solid $borderColor;
+    background-color: #fff;
 }
 </style>

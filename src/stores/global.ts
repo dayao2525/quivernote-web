@@ -4,6 +4,12 @@ import { NoteList, OrderType, OrderSort, NoteItem, NoteLibraryBook, NoteTag, Use
 import {FetchData} from 'boot/axios'
 import useNoteLibraryStore from 'stores/note-library'
 
+export enum PanelMode {
+  Single,
+  Two,
+  Three
+}
+
 interface Props {
     userinfo: UserInfo
     library: NoteLibraryBook[]
@@ -13,6 +19,9 @@ interface Props {
     reminder: any[]
     last_notebookid: string;
     last_noteid: string;
+
+    // config
+    panel_mode: PanelMode
 }
 
 export default defineStore('GlobalStore', {
@@ -28,7 +37,8 @@ export default defineStore('GlobalStore', {
     tags: [],
     reminder: [],
     last_notebookid: '',
-    last_noteid: ''
+    last_noteid: '',
+    panel_mode: PanelMode.Three
   }),
   actions: {
     async init() {
@@ -62,6 +72,9 @@ export default defineStore('GlobalStore', {
                 ,this.tags)
         }
       } catch(e){}
+    },
+    changePanelMode(mode: PanelMode) {
+      this.panel_mode = mode
     }
   },
 });

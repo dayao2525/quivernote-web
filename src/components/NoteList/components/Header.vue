@@ -39,7 +39,7 @@ const noteListStore = useNoteListStore()
 
 .add-btn {
     position: absolute;
-    left: 0;
+    left: 8px;
     top: 0;
     bottom: 0;
     margin: auto 0;

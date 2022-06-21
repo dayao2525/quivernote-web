@@ -1,22 +1,35 @@
 <template>
     <div class="note-main-header row items-center justify-between">
         <div class="left">
-            <q-btn-dropdown class="fit menu-toggle no-border-radius" icon="menu" flat padding="10px 20px"
-                :dropdown-icon="matKeyboardArrowDown">
+            <q-btn-dropdown class="fit menu-toggle no-border-radius" icon="menu" flat padding="10px 0 10px 20px"
+                :dropdown-icon="matKeyboardArrowDown" split @click="toggleDraw">
                 <q-list>
-                    <q-item clickable v-close-popup>
+                    <q-item clickable v-close-popup @click="globalStore.changePanelMode(Mode.Single)">
                         <q-item-section>
-                            <q-item-label>Single Pane</q-item-label>
+
+                            <q-item-label class="sort-item">
+                                <q-icon v-if="globalStore.panel_mode === Mode.Single" :name="matCheck"></q-icon>
+                                <span>Single Pane</span>
+                            </q-item-label>
                         </q-item-section>
+
                     </q-item>
-                    <q-item clickable v-close-popup>
+                    <q-item clickable v-close-popup @click="globalStore.changePanelMode(Mode.Two)">
                         <q-item-section>
-                            <q-item-label>Two Pane</q-item-label>
+
+                            <q-item-label class="sort-item">
+                                <q-icon v-if="globalStore.panel_mode === Mode.Two" :name="matCheck"></q-icon>
+                                <span>Two Pane</span>
+                            </q-item-label>
                         </q-item-section>
+
                     </q-item>
-                    <q-item clickable v-close-popup>
+                    <q-item clickable v-close-popup @click="globalStore.changePanelMode(Mode.Three)">
                         <q-item-section>
-                            <q-item-label>Three Pane</q-item-label>
+                            <q-item-label class="sort-item">
+                                <q-icon v-if="globalStore.panel_mode === Mode.Three" :name="matCheck"></q-icon>
+                                <span>Three Pane</span>
+                            </q-item-label>
                         </q-item-section>
                     </q-item>
                 </q-list>
@@ -78,11 +91,26 @@
     </div>
 </template>
 <script setup lang="ts">
-import { matKeyboardArrowDown, matEdit, matVisibility, matVerticalSplit } from '@quasar/extras/material-icons'
-import useGlobalStore from 'stores/global'
+import { matKeyboardArrowDown, matEdit, matVisibility, matVerticalSplit, matCheck } from '@quasar/extras/material-icons'
+import useGlobalStore, { PanelMode } from 'stores/global'
 import useEditorStore from 'stores/editor'
+import { ref, watch } from 'vue';
 const globalStore = useGlobalStore()
 const editorStore = useEditorStore()
+
+const Mode = PanelMode
+// 最近一次飞single模式
+const lastNotSingleMode = ref(globalStore.panel_mode)
+watch(() => globalStore.panel_mode, (_val: PanelMode, old_val: PanelMode) => {
+    lastNotSingleMode.value = old_val
+})
+const toggleDraw = () => {
+    if (globalStore.panel_mode !== PanelMode.Single) {
+        globalStore.changePanelMode(PanelMode.Single)
+    } else {
+        globalStore.changePanelMode(lastNotSingleMode.value || PanelMode.Three)
+    }
+}
 </script>
 <style lang="scss" scoped>
 .note-main-header {
@@ -111,6 +139,15 @@ const editorStore = useEditorStore()
     :deep(.q-btn-dropdown__arrow) {
         font-size: 14px;
         margin-left: 5px;
+    }
+}
+
+.sort-item {
+    padding-left: 20px;
+
+    :deep(.q-icon) {
+        position: absolute;
+        left: 10px;
     }
 }
 </style>
