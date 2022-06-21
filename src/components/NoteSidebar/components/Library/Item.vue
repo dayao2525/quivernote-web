@@ -1,13 +1,14 @@
 <template>
-    <q-item class="library-item" :active="isActive" active-class="active" clickable v-ripple @click="clickHandler">
+    <q-item class="library-item" :class="{ 'modifyable': modifyable }" :active="isActive" active-class="active"
+        clickable v-ripple @click="clickHandler">
         <q-item-section>
             <q-item-label class="ellipsis tit">{{ book.name }}</q-item-label>
         </q-item-section>
         <q-space />
         <q-item-section side>
             <span class="num">{{ book.notenum }}</span>
-            <div class="actions q-gutter-xs">
-                <q-btn size="10px" flat dense round icon="delete" />
+            <div v-if="modifyable" class="actions q-gutter-xs">
+                <q-btn size="10px" flat dense round icon="delete" @click.stop="deleteHandler" />
                 <q-btn size="10px" flat dense round icon="edit" />
             </div>
         </q-item-section>
@@ -28,9 +29,12 @@ defineExpose({ $q })
 interface Props {
     book: NoteLibraryBook | NoteTag,
     tag?: boolean
+    modifyable?: boolean
 }
 
 const props = defineProps<Props>()
+
+const emits = defineEmits(['delete'])
 
 const noteListStore = useNoteListStore()
 
@@ -44,6 +48,17 @@ const isActive = computed(() => {
 
 const clickHandler = () => {
     noteListStore.changeNoteBook(props.book as NoteLibraryBook, props.tag)
+}
+
+const deleteHandler = () => {
+    $q.dialog({
+        title: 'Confirm',
+        message: 'All notices is this notebook will be moved to trash?',
+        cancel: true,
+        persistent: true
+    }).onOk(() => {
+        emits('delete')
+    })
 }
 </script>
 <style lang="scss" scoped>
@@ -61,14 +76,17 @@ const clickHandler = () => {
         background-color: #2673e7;
     }
 
-    &.active,
-    &:hover {
-        .num {
-            display: none;
-        }
+    &.modifyable {
 
-        .actions {
-            display: block;
+        &.active,
+        &:hover {
+            .num {
+                display: none;
+            }
+
+            .actions {
+                display: block;
+            }
         }
     }
 

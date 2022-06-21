@@ -16,6 +16,13 @@ export default defineStore('NoteLibraryStore', {
     init(books: NoteLibrary[], tags: NoteTag[]) {
         this.books = books
         this.tags = tags
+    },
+    deleteBookById(libraryName: string, notebookid: string) {
+      const library = this.books.find(book => book.name === libraryName)
+      if (library) {
+        const index = library.books.findIndex(item => item.id === notebookid)
+        library.books.splice(index, 1)
+      }
     }
   },
 });
