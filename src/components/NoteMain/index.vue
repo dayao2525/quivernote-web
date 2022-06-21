@@ -22,7 +22,6 @@ const noteDetailStore = useNoteDetailStore()
 const editor = ref()
 onMounted(() => {
     const options = {
-        mode: 'sv',
     }
     editor.value = new Vditor('quivernote-editor', options)
 })

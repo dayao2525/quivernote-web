@@ -28,6 +28,16 @@ export default defineStore('NoteListStore', {
         const data = await FetchData<NoteItem[]>(getNoteList(this.notebookid, this.orderType, this.orderSort))
         data && (this.list = data)
       } catch(e){}
+    },
+    changeOrderType(type: OrderType) {
+      this.orderType = type
+      this.list = []
+      this.fetchData()
+    },
+    changeOrderSort(srot: OrderSort) {
+      this.orderSort = srot
+      this.list = []
+      this.fetchData()
     }
   },
 });

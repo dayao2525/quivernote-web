@@ -1,5 +1,7 @@
 <template>
     <div class="note-list">
+        <Header />
+        <Sort />
         <List />
     </div>
 </template>
@@ -9,6 +11,8 @@ export default {
 }
 </script>
 <script setup lang="ts">
+import Header from './components/Header.vue'
+import Sort from './components/Sort.vue'
 import List from './components/List.vue'
 </script>
 <style lang="scss" scoped>
