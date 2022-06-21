@@ -1,5 +1,6 @@
 <template>
     <div class="note-main col column">
+        <AppBar />
         <Header />
         <div class="col">
             <div id="quivernote-editor"></div>
@@ -12,6 +13,7 @@ export default {
 }
 </script>
 <script setup lang="ts">
+import AppBar from './components/AppBar.vue'
 import Vditor from 'vditor'
 import { onMounted, ref } from 'vue';
 import Header from './components/Header.vue'
