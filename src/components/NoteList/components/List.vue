@@ -1,6 +1,6 @@
 <template>
     <q-scroll-area class="note-list-scroller" content-style="width: 100%">
-        <q-list bordered separator>
+        <q-list separator>
             <Item v-for="note in noteListStore.list" :key="note.id" :note="note" />
         </q-list>
     </q-scroll-area>

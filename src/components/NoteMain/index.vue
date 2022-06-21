@@ -30,9 +30,12 @@ onMounted(() => {
 <style lang="scss" scoped>
 .note-main {
     height: 100vh;
+    border-left: 1px solid $borderColor;
 }
 
 #quivernote-editor {
     height: 100% !important;
+    border-left: none;
+    border-color: $borderColor;
 }
 </style>

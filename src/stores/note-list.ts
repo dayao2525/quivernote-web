@@ -15,13 +15,13 @@ export default defineStore('NoteListStore', {
     addNote(note: NoteItem) {
         this.list.unshift(note)
     },
-    changeNoteBook(book: NoteLibraryBook) {
-      this.notebookid = book.id
+    changeNoteBook(book: NoteLibraryBook, tag?: boolean) {
+      this.notebookid = tag ? book.name : book.id
       this.notebookname = book.name
       this.orderSort = OrderSort.ASC
       this.orderType = OrderType.NAME
       this.list = []
-      this.fetchData(this.notebookid, this.orderType, this.orderSort)
+      this.fetchData()
     },
     async fetchData() {
       try {

@@ -1,6 +1,5 @@
 <template>
-    <q-item class="library-item" :active="noteListStore.notebookid === book.id" active-class="active" clickable v-ripple
-        @click="clickHandler">
+    <q-item class="library-item" :active="isActive" active-class="active" clickable v-ripple @click="clickHandler">
         <q-item-section>
             <q-item-label class="ellipsis tit">{{ book.name }}</q-item-label>
         </q-item-section>
@@ -20,26 +19,36 @@ export default {
 }
 </script>
 <script setup lang="ts">
-import { NoteLibraryBook } from 'src/components/models';
+import { NoteLibraryBook, NoteTag } from 'src/components/models';
 import useNoteListStore from 'stores/note-list'
 import { useQuasar } from 'quasar'
+import { computed } from '@vue/reactivity';
 const $q = useQuasar()
 defineExpose({ $q })
 interface Props {
-    book: NoteLibraryBook
+    book: NoteLibraryBook | NoteTag,
+    tag?: boolean
 }
 
 const props = defineProps<Props>()
 
 const noteListStore = useNoteListStore()
 
+const isActive = computed(() => {
+    if (props.tag) {
+        return noteListStore.notebookid === props.book.name
+    } else {
+        return noteListStore.notebookid === (props.book as NoteLibraryBook).id
+    }
+})
+
 const clickHandler = () => {
-    noteListStore.changeNoteBook(props.book)
+    noteListStore.changeNoteBook(props.book as NoteLibraryBook, props.tag)
 }
 </script>
 <style lang="scss" scoped>
 .library-item {
-    padding-left: 36px;
+    padding-left: 20px;
     color: #444;
     font-size: 12px;
 
