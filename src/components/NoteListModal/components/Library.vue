@@ -1,8 +1,8 @@
 <template>
-    <q-expansion-item class="note-library-expansion" group="library" :label="library.name.toUpperCase()">
+    <q-expansion-item class="note-library-expansion" default-opened :label="library.name.toUpperCase()">
         <q-list class="rounded-borders" dense>
-            <Item v-for="book in library.books" :key="book.id" :book="book"
-                :modifyable="library.name.toUpperCase() === 'NOTEBOOKS'" @delete="deleteHandler(book.id)" :tag="tag" />
+            <Item v-for="book in library.books" :key="book.id" :book="book" :selected="selected"
+                @change="val => $emit('change', val)" />
         </q-list>
     </q-expansion-item>
 </template>
@@ -17,16 +17,14 @@ import useNoteLibraryStore from 'stores/note-library'
 import Item from './Item.vue'
 interface Props {
     library: NoteLibrary
-    tag?: boolean
+    selected: string
 }
 
 const props = defineProps<Props>()
 
 const noteLibraryStore = useNoteLibraryStore()
 
-const deleteHandler = (id: string) => {
-    noteLibraryStore.deleteBookById(props.library.name, id)
-}
+
 </script>
 <style lang="scss" scoped>
 .note-library-expansion {

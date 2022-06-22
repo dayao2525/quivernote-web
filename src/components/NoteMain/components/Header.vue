@@ -1,6 +1,6 @@
 <template>
     <div class="editor-header row no-wrap">
-        <div class="bookname row">
+        <div class="bookname row" @click="showMoveModal = true">
             <q-icon :name="matMenuBook"></q-icon>
             <span class="tit">Inbox</span>
             <q-icon :name="matExpandMore"></q-icon>
@@ -16,15 +16,20 @@
             <q-icon class="schedule-icon" :name="matSchedule"></q-icon>
         </div>
     </div>
+
+    <ModalNoteList v-model="showMoveModal" />
 </template>
 <script setup lang="ts">
 import { matMenuBook, matExpandMore, matSell, matSchedule } from '@quasar/extras/material-icons'
 import TokenField from 'components/TokenField/index.vue'
 import useNoteDetailStore from 'stores/note-detail'
+import ModalNoteList from 'components/NoteListModal/index.vue'
+
 import { date } from 'quasar'
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 
 const noteDetailStore = useNoteDetailStore()
+const showMoveModal = ref(false)
 const tags = computed(() => noteDetailStore.tags ? noteDetailStore.tags.split(',') : [])
 const hasReminider = computed(() => !Array.isArray(noteDetailStore.reminider) && !!noteDetailStore.reminider.finished_time)
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
