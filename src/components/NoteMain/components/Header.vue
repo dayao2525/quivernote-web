@@ -23,7 +23,7 @@
 import { matMenuBook, matExpandMore, matSell, matSchedule } from '@quasar/extras/material-icons'
 import TokenField from 'components/TokenField/index.vue'
 import useNoteDetailStore from 'stores/note-detail'
-import ModalNoteList from 'components/NoteListModal/index.vue'
+import ModalNoteList from 'components/MoveNoteListModal/index.vue'
 
 import { date } from 'quasar'
 import { computed, ref } from 'vue';
