@@ -1,9 +1,8 @@
 <template>
     <div class="editor-header row no-wrap">
         <div class="bookname row" @click="showMoveModal = true">
-            <q-icon :name="matMenuBook"></q-icon>
-            <span class="tit">Inbox</span>
-            <q-icon :name="matExpandMore"></q-icon>
+            <q-btn class="bookname-btn" :label="noteListStore.notebookname" flat dense size="xs" :icon="matMenuBook"
+                :icon-right="matExpandMore" />
         </div>
         <div style="flex: 1">
             <div class="tags row no-wrap">
@@ -23,12 +22,14 @@
 import { matMenuBook, matExpandMore, matSell, matSchedule } from '@quasar/extras/material-icons'
 import TokenField from 'components/TokenField/index.vue'
 import useNoteDetailStore from 'stores/note-detail'
+import useNoteListStore from 'stores/note-list'
 import ModalNoteList from 'components/MoveNoteListModal/index.vue'
 
 import { date } from 'quasar'
 import { computed, ref } from 'vue';
 
 const noteDetailStore = useNoteDetailStore()
+const noteListStore = useNoteListStore()
 const showMoveModal = ref(false)
 const tags = computed(() => noteDetailStore.tags ? noteDetailStore.tags.split(',') : [])
 const hasReminider = computed(() => !Array.isArray(noteDetailStore.reminider) && !!noteDetailStore.reminider.finished_time)
@@ -55,6 +56,10 @@ const scheduleTime = computed(() => hasReminider.value ? date.formatDate(noteDet
         margin: 0 .5em;
         font-size: 12px;
         color: #333;
+    }
+
+    .bookname-btn {
+        height: 20px;
     }
 }
 

@@ -35,7 +35,7 @@
                 </q-list>
             </q-btn-dropdown>
         </div>
-        <div class="center">
+        <div class="center" v-if="noteDetailStore.id">
             <q-btn-toggle class="note-mode-toogle" v-model="editorStore.mode" outline size="sm" padding="5px 29px"
                 toggle-color="primary" :options="[
                     { slot: 'unwatch', value: 'unwatch' },
@@ -95,6 +95,9 @@ import { matKeyboardArrowDown, matEdit, matVisibility, matVerticalSplit, matChec
 import useGlobalStore, { PanelMode } from 'stores/global'
 import useEditorStore from 'stores/editor'
 import { ref, watch } from 'vue';
+import useNoteDetailStore from 'stores/note-detail'
+
+const noteDetailStore = useNoteDetailStore()
 const globalStore = useGlobalStore()
 const editorStore = useEditorStore()
 
