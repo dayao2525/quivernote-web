@@ -15,7 +15,7 @@
                     <Library v-for="library in libraryStore.books" :key="library.name" :library="library" />
                 </div>
                 <div class="note-library-footer row q-px-sm items-center col-shrink">
-                    <q-btn color="primary" rounded flat icon="add" dense />
+                    <q-btn color="primary" rounded flat icon="add" dense @click="addHandler" />
                 </div>
             </q-tab-panel>
 
@@ -38,12 +38,32 @@ import Library from './components/Library/index.vue'
 import TagItem from './components/Library/Item.vue'
 import useLibraryStore from 'stores/note-library'
 import { ref } from 'vue';
+import { useQuasar } from 'quasar'
+const $q = useQuasar()
+
 const libraryStore = useLibraryStore()
 
 const tab = ref('library')
 
 const changeTab = (val: string) => {
     tab.value = val
+}
+
+const addHandler = () => {
+    $q.dialog({
+        title: 'Add NoteBook',
+        message: '',
+        prompt: {
+            model: '',
+            isValid: val => val.length > 2, // << here is the magic
+            type: 'text' // optional
+        },
+        cancel: true,
+        persistent: true,
+    }).onOk(data => {
+        libraryStore.addBook(data)
+        console.log('>>>> OK, received', data)
+    })
 }
 </script>
 <style lang="scss" scoped>

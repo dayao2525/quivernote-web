@@ -16,6 +16,7 @@ export default {
 }
 </script>
 <script setup lang="ts">
+import Header from './components/Header.vue'
 import AppBar from './components/AppBar.vue'
 import useNoteDetailStore from 'stores/note-detail'
 import Editor from './components/Editor.vue'

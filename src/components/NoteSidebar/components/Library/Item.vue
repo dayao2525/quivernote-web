@@ -9,7 +9,7 @@
             <span class="num">{{ book.notenum }}</span>
             <div v-if="modifyable" class="actions q-gutter-xs">
                 <q-btn size="10px" flat dense round icon="delete" @click.stop="deleteHandler" />
-                <q-btn size="10px" flat dense round icon="edit" />
+                <q-btn size="10px" flat dense round icon="edit" @click.stop="editHandler" />
             </div>
         </q-item-section>
     </q-item>
@@ -20,14 +20,16 @@ export default {
 }
 </script>
 <script setup lang="ts">
-import { NoteLibraryBook, NoteTag } from 'src/components/models';
+import { NoteLibraryBook } from 'src/components/models';
 import useNoteListStore from 'stores/note-list'
+import useNoteLibraryStore from 'stores/note-library'
 import { useQuasar } from 'quasar'
 import { computed } from '@vue/reactivity';
+import { ref } from 'vue'
 const $q = useQuasar()
 defineExpose({ $q })
 interface Props {
-    book: NoteLibraryBook | NoteTag,
+    book: NoteLibraryBook,
     tag?: boolean
     modifyable?: boolean
 }
@@ -37,6 +39,7 @@ const props = defineProps<Props>()
 const emits = defineEmits(['delete'])
 
 const noteListStore = useNoteListStore()
+const noteLibraryStore = useNoteLibraryStore()
 
 const isActive = computed(() => {
     if (props.tag) {
@@ -58,6 +61,24 @@ const deleteHandler = () => {
         persistent: true
     }).onOk(() => {
         emits('delete')
+    })
+}
+
+const editHandler = () => {
+    const posting = ref(false)
+    const dialog = $q.dialog({
+        title: 'Change NoteBook Name',
+        message: '',
+        prompt: {
+            model: props.book.name,
+            isValid: val => val.length > 2 || !posting, // << here is the magic
+            type: 'text' // optional
+        },
+        cancel: true,
+        persistent: true,
+    }).onOk(data => {
+        noteLibraryStore.updateBookName(props.book.id, data)
+        console.log('>>>> OK, received', data)
     })
 }
 </script>
