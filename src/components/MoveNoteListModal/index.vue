@@ -27,7 +27,7 @@
 </template>
 <script lang="ts">
 export default {
-    name: 'NoteListModal'
+    name: 'MoveNoteListModal'
 }
 </script>
 <script setup lang="ts">
