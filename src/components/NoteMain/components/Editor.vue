@@ -15,6 +15,7 @@ const editor = ref()
 onMounted(() => {
   const options = {
     cdn: '/vditor',
+    mode: 'sv',
     toolbar: [
       'undo', 'redo', '|',
       'emoji', 'headings', 'bold', 'italic', 'strike', 'link', '|',
@@ -39,6 +40,7 @@ onMounted(() => {
       index: 1001
     },
     preview: {
+      mode: 'editor',
       actions: [],
       markdown: {
         toc: true
@@ -46,6 +48,18 @@ onMounted(() => {
     },
     cache: {
       enable: false
+    },
+    title: {
+      value: detailStore.name,
+      blur(event: MouseEvent, instance: Vditor) {
+        console.log('blur', event, instance)
+      },
+      focus(event: MouseEvent, instance: Vditor) {
+        console.log('focus', event, instance)
+      },
+      input(event: KeyboardEvent, instance: Vditor) {
+        console.log('input', event, instance)
+      }
     },
     after() {
       $editor.setValue(detailStore.content, true)

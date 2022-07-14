@@ -14,7 +14,7 @@
         "build:pwa": "quasar build -m pwa"
     },
     "dependencies": {
-        "@dayao2525/vditor": "^0.0.2-0",
+        "@dayao2525/vditor": "^0.0.2-1",
         "@quasar/extras": "^1.0.0",
         "axios": "^0.21.1",
         "pinia": "^2.0.11",
