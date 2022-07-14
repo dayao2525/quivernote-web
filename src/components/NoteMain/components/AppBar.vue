@@ -1,99 +1,99 @@
 <template>
-    <div class="note-main-header row items-center justify-between">
-        <div class="left">
-            <q-btn-dropdown class="fit menu-toggle no-border-radius" icon="menu" flat padding="10px 0 10px 20px"
-                :dropdown-icon="matKeyboardArrowDown" split @click="toggleDraw">
-                <q-list>
-                    <q-item clickable v-close-popup @click="globalStore.changePanelMode(Mode.Single)">
-                        <q-item-section>
+  <div class="note-main-header row items-center justify-between">
+    <div class="left">
+      <q-btn-dropdown class="fit menu-toggle no-border-radius" icon="menu" flat padding="10px 0 10px 20px"
+        :dropdown-icon="matKeyboardArrowDown" split @click="toggleDraw">
+        <q-list>
+          <q-item clickable v-close-popup @click="globalStore.changePanelMode(Mode.Single)">
+            <q-item-section>
 
-                            <q-item-label class="sort-item">
-                                <q-icon v-if="globalStore.panel_mode === Mode.Single" :name="matCheck"></q-icon>
-                                <span>Single Pane</span>
-                            </q-item-label>
-                        </q-item-section>
+              <q-item-label class="sort-item">
+                <q-icon v-if="globalStore.panel_mode === Mode.Single" :name="matCheck"></q-icon>
+                <span>Single Pane</span>
+              </q-item-label>
+            </q-item-section>
 
-                    </q-item>
-                    <q-item clickable v-close-popup @click="globalStore.changePanelMode(Mode.Two)">
-                        <q-item-section>
+          </q-item>
+          <q-item clickable v-close-popup @click="globalStore.changePanelMode(Mode.Two)">
+            <q-item-section>
 
-                            <q-item-label class="sort-item">
-                                <q-icon v-if="globalStore.panel_mode === Mode.Two" :name="matCheck"></q-icon>
-                                <span>Two Pane</span>
-                            </q-item-label>
-                        </q-item-section>
+              <q-item-label class="sort-item">
+                <q-icon v-if="globalStore.panel_mode === Mode.Two" :name="matCheck"></q-icon>
+                <span>Two Pane</span>
+              </q-item-label>
+            </q-item-section>
 
-                    </q-item>
-                    <q-item clickable v-close-popup @click="globalStore.changePanelMode(Mode.Three)">
-                        <q-item-section>
-                            <q-item-label class="sort-item">
-                                <q-icon v-if="globalStore.panel_mode === Mode.Three" :name="matCheck"></q-icon>
-                                <span>Three Pane</span>
-                            </q-item-label>
-                        </q-item-section>
-                    </q-item>
-                </q-list>
-            </q-btn-dropdown>
-        </div>
-        <div class="center" v-if="noteDetailStore.id">
-            <q-btn-toggle class="note-mode-toogle" v-model="editorStore.mode" outline size="sm" padding="5px 29px"
-                toggle-color="primary" :options="[
-                    { slot: 'unwatch', value: 'unwatch' },
-                    { slot: 'preview', value: 'preview' },
-                    { slot: 'watch', value: 'watch' }
-                ]">
-
-                <template v-slot:unwatch>
-                    <div class="row items-center no-wrap">
-                        <q-icon :name="matEdit" />
-                    </div>
-                </template>
-                <template v-slot:preview>
-                    <div class="row items-center no-wrap">
-                        <q-icon :name="matVisibility" />
-                    </div>
-                </template>
-                <template v-slot:watch>
-                    <div class="row items-center no-wrap">
-                        <q-icon :name="matVerticalSplit" />
-                    </div>
-                </template>
-            </q-btn-toggle>
-        </div>
-        <div class="right">
-            <q-btn-dropdown v-if="globalStore.userinfo.id" class="fit menu-toggle no-border-radius" flat
-                padding="10px 20px" :dropdown-icon="matKeyboardArrowDown">
-                <template v-slot:label>
-                    <q-avatar size="26px">
-                        <img :src="globalStore.userinfo.avatar">
-                    </q-avatar>
-                </template>
-                <q-list>
-                    <q-item clickable v-close-popup>
-                        <q-item-section>
-                            <q-item-label>{{ globalStore.userinfo.name }}</q-item-label>
-                        </q-item-section>
-                    </q-item>
-                    <q-item clickable v-close-popup>
-                        <q-item-section>
-                            <q-item-label>Setings</q-item-label>
-                        </q-item-section>
-                    </q-item>
-                    <q-item clickable v-close-popup>
-                        <q-item-section>
-                            <q-item-label>Sign out</q-item-label>
-                        </q-item-section>
-                    </q-item>
-                </q-list>
-            </q-btn-dropdown>
-
-        </div>
+          </q-item>
+          <q-item clickable v-close-popup @click="globalStore.changePanelMode(Mode.Three)">
+            <q-item-section>
+              <q-item-label class="sort-item">
+                <q-icon v-if="globalStore.panel_mode === Mode.Three" :name="matCheck"></q-icon>
+                <span>Three Pane</span>
+              </q-item-label>
+            </q-item-section>
+          </q-item>
+        </q-list>
+      </q-btn-dropdown>
     </div>
+    <div class="center" v-if="noteDetailStore.id">
+      <q-btn-toggle class="note-mode-toogle" :model-value="editorStore.mode" outline size="sm" padding="5px 29px"
+        toggle-color="primary" :options="[
+          { slot: 'unwatch', value: 'unwatch' },
+          { slot: 'preview', value: 'preview' },
+          { slot: 'watch', value: 'watch' }
+        ]" @update:model-value="changeModeHandle">
+
+        <template v-slot:unwatch>
+          <div class="row items-center no-wrap">
+            <q-icon :name="matEdit" />
+          </div>
+        </template>
+        <template v-slot:preview>
+          <div class="row items-center no-wrap">
+            <q-icon :name="matVisibility" />
+          </div>
+        </template>
+        <template v-slot:watch>
+          <div class="row items-center no-wrap">
+            <q-icon :name="matVerticalSplit" />
+          </div>
+        </template>
+      </q-btn-toggle>
+    </div>
+    <div class="right">
+      <q-btn-dropdown v-if="globalStore.userinfo.id" class="fit menu-toggle no-border-radius" flat padding="10px 20px"
+        :dropdown-icon="matKeyboardArrowDown">
+        <template v-slot:label>
+          <q-avatar size="26px">
+            <img :src="globalStore.userinfo.avatar">
+          </q-avatar>
+        </template>
+        <q-list>
+          <q-item clickable v-close-popup>
+            <q-item-section>
+              <q-item-label>{{ globalStore.userinfo.name }}</q-item-label>
+            </q-item-section>
+          </q-item>
+          <q-item clickable v-close-popup>
+            <q-item-section>
+              <q-item-label>Setings</q-item-label>
+            </q-item-section>
+          </q-item>
+          <q-item clickable v-close-popup>
+            <q-item-section>
+              <q-item-label>Sign out</q-item-label>
+            </q-item-section>
+          </q-item>
+        </q-list>
+      </q-btn-dropdown>
+
+    </div>
+  </div>
 </template>
 <script setup lang="ts">
 import { matKeyboardArrowDown, matEdit, matVisibility, matVerticalSplit, matCheck } from '@quasar/extras/material-icons'
 import useGlobalStore, { PanelMode } from 'stores/global'
-import useEditorStore from 'stores/editor'
+import useEditorStore, { EditorMode } from 'stores/editor'
 import { ref, watch } from 'vue';
 import useNoteDetailStore from 'stores/note-detail'
 
@@ -105,52 +105,80 @@ const Mode = PanelMode
 // 最近一次飞single模式
 const lastNotSingleMode = ref(globalStore.panel_mode)
 watch(() => globalStore.panel_mode, (_val: PanelMode, old_val: PanelMode) => {
-    lastNotSingleMode.value = old_val
+  lastNotSingleMode.value = old_val
 })
 const toggleDraw = () => {
-    if (globalStore.panel_mode !== PanelMode.Single) {
-        globalStore.changePanelMode(PanelMode.Single)
-    } else {
-        globalStore.changePanelMode(lastNotSingleMode.value || PanelMode.Three)
+  if (globalStore.panel_mode !== PanelMode.Single) {
+    globalStore.changePanelMode(PanelMode.Single)
+  } else {
+    globalStore.changePanelMode(lastNotSingleMode.value || PanelMode.Three)
+  }
+}
+
+const changeModeHandle = (mode: EditorMode) => {
+  if (editorStore.editor && editorStore.mode !== mode) {
+    switch (mode) {
+      case EditorMode.unwatch:
+        editorStore.editor.enable()
+        editorStore.editor.setEditMode('sv')
+        editorStore.editor.setPreviewMode('editor')
+        break;
+      case EditorMode.preview:
+        editorStore.editor.setEditMode('sv');
+        editorStore.editor.setPreviewMode('both')
+        editorStore.editor.disabled()
+        // 隐藏编辑区域
+        editorStore.editor.vditor.sv.element.style.display = 'none'
+        break;
+      case EditorMode.watch:
+        editorStore.editor.enable()
+        editorStore.editor.setEditMode('sv')
+        editorStore.editor.setPreviewMode('both')
+        // 显示编辑区域
+        editorStore.editor.vditor.sv.element.style.display = 'block'
+        break;
     }
+    editorStore.mode = mode
+  }
+  console.log('changeModeHandle', mode)
 }
 </script>
 <style lang="scss" scoped>
 .note-main-header {
-    height: $headerbarHeight;
-    border-bottom: 1px solid $borderColor;
+  height: $headerbarHeight;
+  border-bottom: 1px solid $borderColor;
 }
 
 .note-mode-toogle {
-    :deep(.q-btn-item) {
-        &.text-primary {
-            background-color: $primary  !important;
+  :deep(.q-btn-item) {
+    &.text-primary {
+      background-color: $primary  !important;
 
-            .q-btn__content {
-                color: #fff !important;
-            }
-        }
-
-        &:nth-of-type(2) {
-            border-right: 1px solid $primary;
-            border-left: 1px solid $primary;
-        }
+      .q-btn__content {
+        color: #fff !important;
+      }
     }
+
+    &:nth-of-type(2) {
+      border-right: 1px solid $primary;
+      border-left: 1px solid $primary;
+    }
+  }
 }
 
 .menu-toggle {
-    :deep(.q-btn-dropdown__arrow) {
-        font-size: 14px;
-        margin-left: 5px;
-    }
+  :deep(.q-btn-dropdown__arrow) {
+    font-size: 14px;
+    margin-left: 5px;
+  }
 }
 
 .sort-item {
-    padding-left: 20px;
+  padding-left: 20px;
 
-    :deep(.q-icon) {
-        position: absolute;
-        left: 10px;
-    }
+  :deep(.q-icon) {
+    position: absolute;
+    left: 10px;
+  }
 }
 </style>

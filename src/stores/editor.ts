@@ -1,3 +1,4 @@
+import Vditor from '@dayao2525/vditor';
 import { defineStore } from 'pinia';
 
 export enum EditorMode {
@@ -7,12 +8,14 @@ export enum EditorMode {
 }
 
 interface Props {
-    mode: EditorMode
+    mode: EditorMode,
+    editor: Vditor | undefined
 }
 
 export default defineStore('EditorStore', {
   state: ():Props => ({
-    mode: EditorMode.unwatch
+    mode: EditorMode.unwatch,
+    editor: void 0
   }),
   actions: {
     async changeMode(mode: EditorMode) {
